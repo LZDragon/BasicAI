@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject navPointContainer;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private int numberOfEnemies = 4;
+    [SerializeField] private Player player;
     private Transform[] navPoints;
 
     // Start is called before the first frame update
@@ -27,7 +28,10 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < numberOfEnemies; i++)
         {
             Vector3 randomNavPosition = navPoints[Random.Range(0, navPoints.Length - 1)].position;
-            Instantiate(enemyPrefab, randomNavPosition, Quaternion.identity);
+            GameObject generatedObject = Instantiate(enemyPrefab, randomNavPosition, Quaternion.identity);
+            Enemy generatedEnemy = generatedObject.GetComponent<Enemy>();
+            generatedEnemy.NavPoints = navPoints;
+            generatedEnemy.SetPlayer(player);
         }
     }
 
