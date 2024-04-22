@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -12,13 +13,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private HealthComponent enemyHealthComponent;
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private Player player;
+    private bool isDead = false;
 
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
     public void SetPlayer(Player playerRef)
     {
         player = playerRef;
     }
 
-    [SerializeField] private float enemyVisibilityRange = 3f;
+    [SerializeField] private float enemyVisibilityRange = 5f;
     private Transform[] navPoints;
 
     public Transform[] NavPoints
@@ -35,8 +42,12 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         enemyHealthComponent.HandleHealthUpdated += UpdateHealth;
+        enemyHealthComponent.HandleOnKilled += OnKilled;
         isGameRunning = true;
+        healthBar.maxValue = enemyHealthComponent.Health;
+        healthBar.value = enemyHealthComponent.Health;
         StartCoroutine(UpdateDestination());
+        AssignHealthBarRotationConstraint();
     }
 
     // Update is called once per frame
@@ -45,9 +56,23 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void AssignHealthBarRotationConstraint()
+    {
+        ConstraintSource rotationConstraintSource = new ConstraintSource();
+        rotationConstraintSource.sourceTransform = Camera.main.transform;
+        rotationConstraintSource.weight = 1;
+        GetComponentInChildren<RotationConstraint>().SetSource(0,rotationConstraintSource);
+    }
+
     private void UpdateHealth(float health)
     {
         healthBar.value = health;
+    }
+
+    private void OnKilled()
+    {
+        isDead = true;
+        gameObject.SetActive(false);
     }
 
     private bool CheckPlayerInRange()
@@ -70,12 +95,13 @@ public class Enemy : MonoBehaviour
                 navMeshAgent.destination = player.transform.position;
                 
             }
-            else if(navMeshAgent.nextPosition == navMeshAgent.destination || !navMeshAgent.hasPath )
+            else if(navMeshAgent.nextPosition == navMeshAgent.destination || !navMeshAgent.hasPath || navMeshAgent.isStopped)
             {
                 navMeshAgent.destination = navPoints[Random.Range(0, navPoints.Length - 1)].position;
             }
 
-            yield return new WaitForSeconds(3);
+
+            yield return new WaitForSeconds(2);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int numberOfEnemies = 4;
     [SerializeField] private Player player;
     private Transform[] navPoints;
+    private List<Enemy> enemiesInLevel = new List<Enemy>();
+    private bool isGameRunning = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour
             Enemy generatedEnemy = generatedObject.GetComponent<Enemy>();
             generatedEnemy.NavPoints = navPoints;
             generatedEnemy.SetPlayer(player);
+            enemiesInLevel.Add(generatedEnemy);
         }
     }
 
@@ -41,6 +45,18 @@ public class GameManager : MonoBehaviour
         if (navPoints.Length < 1)
         {
             Debug.LogError("Not enough NavPoints in NavPointsContainer");
+        }
+    }
+
+    private IEnumerator CheckIfAllEnemiesDead()
+    {
+        while (isGameRunning)
+        {
+            foreach (var enemy in enemiesInLevel)
+            {
+                
+            }
+            yield return new WaitForSeconds(2);
         }
     }
 }

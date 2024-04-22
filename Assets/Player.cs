@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private CharacterController playerCharacterController;
     [SerializeField] private Slider playerHealthBar;
     [SerializeField] private Camera mainCamera;
-    
+
     private Vector3 moveDirection;
     private bool playerFired = false;
 
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         Movement();
         if (playerFired)
         {
-            
+            CheckHit();
         }
     }
 
@@ -47,12 +47,69 @@ public class Player : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        
+        playerFired = context.performed;
     }
+
+    private static bool ShouldDebug = true;
+    private static float DebugDuration = 2.0f;
+    private bool RayCastWithDebug(Vector3 Start, Vector3 Dir, out RaycastHit HitData, float Distance, int LayerMask)
+    {
+        bool WasHit = Physics.Raycast(Start, Dir, out HitData, Distance, LayerMask);
+        if (ShouldDebug)
+        {
+            Color HitColor = Color.green;
+            Color MissedColor = Color.red;
+            Vector3 EndPoint = (Dir * Distance) + Start;
+            
+            if (WasHit)
+            {
+                Vector3 HitPoint = HitData.point;
+                Debug.DrawLine(Start, HitPoint, HitColor, DebugDuration);
+                Debug.DrawLine(HitPoint, EndPoint, MissedColor, DebugDuration);
+            }
+            else
+            {
+                Debug.DrawLine(Start, EndPoint, MissedColor, DebugDuration);
+            }
+            Debug.DrawRay(Start, Dir);
+        }
+
+        return WasHit;
+    }
+    
 
     void CheckHit()
     {
+        Plane clickPlane = new Plane(Vector3.up, -0.5f);
+        float distance;
+        Vector3 mouseWorldPosition;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (clickPlane.Raycast(ray, out distance))
+        {
+            mouseWorldPosition = ray.GetPoint(distance);
+            Vector3 heightOffset = new Vector3(mouseWorldPosition.x, 0, mouseWorldPosition.z);
+            Vector3 shotDirection = heightOffset - transform.position;
 
+            if (RayCastWithDebug(transform.position, shotDirection, out RaycastHit hit, 5f, 1<<6))
+            {
+                if (hit.transform.TryGetComponent(out Enemy enemyComponent))
+                {
+                    hit.transform.GetComponent<HealthComponent>().TakeDamage(20);
+                }
+            }
+            else
+            {
+                if (Physics.SphereCast(transform.position , 1.5f, shotDirection, out RaycastHit radiusHit, 5f, 1<<7,
+                        QueryTriggerInteraction.Collide))
+                {
+                    radiusHit.transform.GetComponent<HealthComponent>().TakeDamage(20f);
+                }
+            }
+        }
+        
+        
+        
+        playerFired = false;
     }
 
     void Movement()

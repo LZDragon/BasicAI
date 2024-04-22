@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2267830463489661999}
   - component: {fileID: 4793585512473587662}
   - component: {fileID: 8079687290194731342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b27f019ac246b5c44a2d4bc3278640ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 2221181037328480312}
   - component: {fileID: 2188001544052495911}
   - component: {fileID: 6221287775508732751}
-  - component: {fileID: 6105284303444367204}
+  - component: {fileID: 6334606989836781115}
   m_Layer: 5
   m_Name: EnemyCanvas
   m_TagString: Untagged
@@ -631,8 +631,8 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1773428102 &6105284303444367204
-ParentConstraint:
+--- !u!1818360609 &6334606989836781115
+RotationConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -641,15 +641,8 @@ ParentConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1.57, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffsets:
-  - {x: 2.78, y: -3.5476701, z: 11.26457}
-  m_RotationOffsets:
-  - {x: -44.543198, y: 0, z: 0}
-  m_AffectTranslationX: 0
-  m_AffectTranslationY: 0
-  m_AffectTranslationZ: 0
+  m_RotationOffset: {x: 0, y: 0, z: 0}
   m_AffectRotationX: 1
   m_AffectRotationY: 1
   m_AffectRotationZ: 1
