@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 [RequireComponent(typeof (CharacterController))]
@@ -46,12 +47,12 @@ public class Player : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        playerFired = context.ReadValueAsButton();
+        
     }
 
     void CheckHit()
     {
-        
+
     }
 
     void Movement()
