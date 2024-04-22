@@ -52,9 +52,9 @@ public class Enemy : MonoBehaviour
 
     private bool CheckPlayerInRange()
     {
-        float distance = Mathf.Sqrt(Mathf.Pow((transform.position.x - player.transform.position.x), 2) +
-                                    Mathf.Pow((transform.position.z - player.transform.position.z), 2));
-        if ( distance < enemyVisibilityRange)
+        float distanceSquared = Mathf.Pow((transform.position.x - player.transform.position.x), 2) +
+                                    Mathf.Pow((transform.position.z - player.transform.position.z), 2);
+        if ( distanceSquared < Mathf.Pow(enemyVisibilityRange,2))
         {
             return true;
         }
