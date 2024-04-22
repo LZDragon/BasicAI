@@ -13,8 +13,10 @@ public class Player : MonoBehaviour
     private HealthComponent playerHealthComponent;
     private CharacterController playerCharacterController;
     [SerializeField] private Slider playerHealthBar;
+    [SerializeField] private Camera mainCamera;
     
     private Vector3 moveDirection;
+    private bool playerFired = false;
 
 
     // Start is called before the first frame update
@@ -22,18 +24,34 @@ public class Player : MonoBehaviour
     {
         playerHealthComponent = GetComponent<HealthComponent>();
         playerHealthComponent.HandleHealthUpdated += OnHealthUpdated;
+        playerHealthComponent.HandleOnKilled += OnKilled;
         playerCharacterController = GetComponent<CharacterController>();
+        playerHealthBar.maxValue = playerHealthComponent.Health;
     }
 
     private void FixedUpdate()
     {
         Movement();
+        if (playerFired)
+        {
+            
+        }
     }
 
-    void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         moveDirection = context.ReadValue<Vector2>();
         moveDirection = new Vector3(moveDirection.x, 0, moveDirection.y);
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        playerFired = context.ReadValueAsButton();
+    }
+
+    void CheckHit()
+    {
+        
     }
 
     void Movement()

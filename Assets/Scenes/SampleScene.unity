@@ -704,7 +704,7 @@ Transform:
   m_GameObject: {fileID: 356097679}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.3, y: 2.82, z: -3.1099992}
+  m_LocalPosition: {x: 5.3, y: 0.03, z: -3.1099992}
   m_LocalScale: {x: 21.403793, y: 3.9436, z: 1.0909384}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -809,7 +809,7 @@ Transform:
   m_GameObject: {fileID: 361377943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.7599998, y: 0.6200001, z: -22.720001}
+  m_LocalPosition: {x: 6.7599998, y: -2.04, z: -22.720001}
   m_LocalScale: {x: 0.8315829, y: 4.2168, z: 16.828735}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1136,6 +1136,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1233,6 +1234,26 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1496539563661220147, guid: 9ada946a090100746a4cdbf7e04aa403, type: 3}
   numberOfEnemies: 4
   player: {fileID: 389203294}
+--- !u!1818360608 &963194230
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 14.08, z: -14.62}
+  m_TranslationOffset: {x: 0, y: 12.33, z: -14.62}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 0
+  m_AffectTranslationZ: 1
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 1783602800}
+    weight: 1
 --- !u!1 &979478529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,8 +1489,8 @@ Transform:
   m_GameObject: {fileID: 1190797412}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7600002, y: 1.81, z: 2.5}
-  m_LocalScale: {x: 9.676875, y: 3.9436, z: 1.0909384}
+  m_LocalPosition: {x: -1.14, y: 1.81, z: 2.5}
+  m_LocalScale: {x: 8.182669, y: 3.9436, z: 1.0909384}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1726698062}
@@ -2056,6 +2077,11 @@ Transform:
   - {fileID: 1610502720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1783602800 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2552577044838215193, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+  m_PrefabInstance: {fileID: 4326114055610486952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1891540046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,7 +2805,7 @@ Transform:
   m_GameObject: {fileID: 2107905271}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: -26.71}
+  m_LocalPosition: {x: 0, y: -1.98, z: -26.71}
   m_LocalScale: {x: 13.938, y: 3.9436, z: 1.0909384}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2797,6 +2823,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 453958313006867478, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453958313006867478, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 389203294}
+    - target: {fileID: 453958313006867478, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 453958313006867478, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 453958313006867478, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2552577044838215193, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2840,6 +2886,14 @@ PrefabInstance:
     - target: {fileID: 3583888985717272558, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171849254575925898, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171849254575925898, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6602510462475426809, guid: ea819cfe84238b2488f6ad37bec83ce1, type: 3}
       propertyPath: m_AnchorMax.x
