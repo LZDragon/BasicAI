@@ -121,8 +121,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1496539563661220147}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5000001
-  m_Speed: 1
+  m_Radius: 0.98
+  m_Speed: 2
   m_Acceleration: 7
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -163,7 +163,7 @@ MonoBehaviour:
   enemyHealthComponent: {fileID: 2267830463489661999}
   navMeshAgent: {fileID: 1165696857515652751}
   player: {fileID: 0}
-  enemyVisibilityRange: 3
+  enemyVisibilityRange: 7
 --- !u!114 &8079687290194731342
 MonoBehaviour:
   m_ObjectHideFlags: 0

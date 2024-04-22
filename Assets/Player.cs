@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof (CharacterController))]
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour
         playerFired = context.performed;
     }
 
-    private static bool ShouldDebug = true;
+    private static bool ShouldDebug = false;
     private static float DebugDuration = 2.0f;
     private bool RayCastWithDebug(Vector3 Start, Vector3 Dir, out RaycastHit HitData, float Distance, int LayerMask)
     {
@@ -127,7 +128,7 @@ public class Player : MonoBehaviour
 
     void OnKilled()
     {
-        
+        SceneManager.LoadScene(3);
     }
 
 

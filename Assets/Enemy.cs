@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         player = playerRef;
     }
 
-    [SerializeField] private float enemyVisibilityRange = 5f;
+    [SerializeField] private float enemyVisibilityRange = 10f;
     private Transform[] navPoints;
 
     public Transform[] NavPoints

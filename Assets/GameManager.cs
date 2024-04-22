@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
             generatedEnemy.SetPlayer(player);
             enemiesInLevel.Add(generatedEnemy);
         }
+
+        isGameRunning = true;
+        StartCoroutine(CheckIfAllEnemiesDead());
     }
 
     private void PopulateNavPointsList()
@@ -50,11 +54,24 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CheckIfAllEnemiesDead()
     {
+        int amountDead = 0;
         while (isGameRunning)
         {
             foreach (var enemy in enemiesInLevel)
             {
-                
+                if (enemy.IsDead())
+                {
+                    amountDead++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (amountDead >= enemiesInLevel.Count)
+            {
+                SceneManager.LoadScene(2);
             }
             yield return new WaitForSeconds(2);
         }
